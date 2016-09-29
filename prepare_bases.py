@@ -81,7 +81,7 @@ def clear_previous_dir(dir_):
 
 
 def run():
-    src_dir = '/home/kwent/Bases/vk_test'
+    src_dir = '/home/kwent/Bases/vk'
     dst_dir = '/home/kwent/Bases/vk_likes'
     dst_dir_for_images = 'images'
     dst_weight_file_name = 'all_weights.txt'
@@ -90,6 +90,7 @@ def run():
     count_person = len(dirs)
     index = 1
     image_index = 1
+    limit = 0
     print('Removing previous version...')
     clear_previous_dir(dst_dir)
     print('Starting conversion...')
@@ -103,10 +104,12 @@ def run():
                                              image_index,
                                              weight_file_name=dst_weight_file_name,
                                              dir_for_images=dst_dir_for_images)
-        if index % 100 == 0:
-            print(index, '/', count_person, '|', round(index/count_person*100, 5), '%')
+        if index % 10 == 0:
+            print(index, '/', count_person, '|', round(index/count_person*100, 5), '% images: ', image_index)
         index += 1
+        if limit and image_index >= limit:
+            break
     print('Conversion has been finished!')
     test(dst_dir_=dst_dir, weight_file_name=dst_weight_file_name, dir_for_images=dst_dir_for_images)
 
-run()
+# run()
